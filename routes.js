@@ -4,7 +4,7 @@ var mkdirp = require('mkdirp');
 
 var storage = multer.diskStorage({
 	destination : (req, file, cb) => {
-		var dir = './uploads/'+req.params.folder;
+		var dir = __dirname+'/uploads/'+req.params.folder;
 		if (!fs.existsSync(dir)){
 		    fs.mkdirSync(dir);
 		}
