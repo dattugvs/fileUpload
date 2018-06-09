@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Folder</title>
+</head>
+<body>
+<% if (!user)  { %>
+<h4>Sign-Up</h4>
+<form method="post" id="upload" action="/" enctype="multipart/form-data">
+	Upload Multiple files : 
+	<input type="file" name="files" multiple required>
+	<br><br> Set Folder name : 
+	<input type="text" name="folder" id="folder" onblur="setAction()" required>
+	<br><br> Set Password : 
+	<input type="password" name="password" required><br><br>
+	<input type="submit" value="submit">
+</form>
+	<br>
+	<hr>
+	<h4>Sign-In</h4>
+	<form method="post" action="/signin">
+		<input type="text" name="folder" placeholder="Enter folder name" required><br><br>
+		<input type="password" name="password" placeholder="Enter password" required>
+		<br><br>
+		<input type="submit" value="submit">
+	</form>
+	<br>
+	<hr>
+	<% } else { %>
+		<a href="/logout">Logout</a>
+		<h4>Your Folder</h4>
+		<ol>
+			<% for(var i=0; i<user.files.length; i++) { %>
+				<li><%= user.files[i].fname %></li>
+			<% } %>
+		</ol>
+	<% } %>
+<script type="text/javascript">
+	function setAction()
+	{
+		var form = document.getElementById('upload');
+		var folder = document.getElementById('folder');
+		var action = '/upload/'+folder.value;
+		form.action = action;
+	}
+</script>
+</body>
+</html>
